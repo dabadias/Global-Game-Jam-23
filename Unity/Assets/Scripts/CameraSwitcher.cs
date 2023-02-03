@@ -24,10 +24,10 @@ public class CameraSwitcher : MonoBehaviour
         switch (Input.inputString)
         {
             case "1":
-                v_cam.Follow = camera_targets[0];
+                if (camera_targets.Length > 0) v_cam.Follow = camera_targets[0];
                 break;
             case "2":
-                v_cam.Follow = camera_targets[1];
+                if (camera_targets.Length > 1) v_cam.Follow = camera_targets[1];
                 break;
             default:
                 break;
