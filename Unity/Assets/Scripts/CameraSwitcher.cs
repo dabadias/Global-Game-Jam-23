@@ -1,17 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 
 public class CameraSwitcher : MonoBehaviour
 {
+    private CinemachineVirtualCamera _vcam;
     public Transform[] camera_targets;
-    private CinemachineVirtualCamera v_cam;
 
 
     private void Start()
     {
-        v_cam = GetComponent<CinemachineVirtualCamera>();
+        _vcam = GetComponent<CinemachineVirtualCamera>();
     }
 
     private void Update()
@@ -21,16 +19,20 @@ public class CameraSwitcher : MonoBehaviour
 
     private void ChangeFollow()
     {
-        switch (Input.inputString)
+        try
         {
-            case "1":
-                if (camera_targets.Length > 0) v_cam.Follow = camera_targets[0];
-                break;
-            case "2":
-                if (camera_targets.Length > 1) v_cam.Follow = camera_targets[1];
-                break;
-            default:
-                break;
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                _vcam.Follow = camera_targets[0];
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                _vcam.Follow = camera_targets[1];
+            }
+        }
+        catch (System.IndexOutOfRangeException ex)
+        {
+            Debug.LogError(ex);
         }
     }
 }
