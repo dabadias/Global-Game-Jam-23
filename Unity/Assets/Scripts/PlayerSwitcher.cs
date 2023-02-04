@@ -7,7 +7,7 @@ public class PlayerSwitcher : MonoBehaviour
 {
     public GameObject[] players;
     [HideInInspector] public GameObject currentPlayer => players[_currentPlayer];
-    
+
     private CinemachineVirtualCamera _vcam;
     private List<Transform> _cameraTargets;
     private List<PlayerInput> _playerInputs;
@@ -48,8 +48,9 @@ public class PlayerSwitcher : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Alpha1)) newPlayer = 0;
             else if (Input.GetKeyDown(KeyCode.Alpha2)) newPlayer = 1;
+            else if (Input.GetKeyDown(KeyCode.Alpha3)) newPlayer = 2;
 
-            if (newPlayer != -1 && newPlayer != _currentPlayer)
+            if (newPlayer != -1 && newPlayer < players.Length && newPlayer != _currentPlayer)
             {
                 _vcam.Follow = _cameraTargets[newPlayer];
                 _playerInputs[_currentPlayer].enabled = false;

@@ -1,9 +1,10 @@
+using System;
 using StarterAssets;
 using UnityEngine;
 
 public class Button : MonoBehaviour
 {
-    public GameObject playerThatCanSee;
+    public GameObject[] playersThatCanSee;
     private StarterAssetsInputs _input;
     private PlayerSwitcher _playerSw;
     private MeshRenderer _mesh;
@@ -52,6 +53,6 @@ public class Button : MonoBehaviour
 
     private void ShowHide()
     {
-        _mesh.enabled = _playerSw.currentPlayer == playerThatCanSee;
+        _mesh.enabled = Array.Exists(playersThatCanSee, e => e == _playerSw.currentPlayer);
     }
 }
