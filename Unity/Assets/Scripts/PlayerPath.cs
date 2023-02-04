@@ -8,8 +8,8 @@ public class PlayerPath : MonoBehaviour
     private List<Vector3> _positions;
     private List<Quaternion> _rotations;
     private List<LineRenderer> _lines;
-    private float _period = 0.033f;
-    private float _nextUpdate = 0.0f;
+    // private float _period = 0.033f;
+    // private float _nextUpdate = 0.0f;
     private float speed = 10f;
     private bool _rewinding;
 
@@ -34,11 +34,11 @@ public class PlayerPath : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Time.time > _nextUpdate)
-        {
-            _nextUpdate += _period;
-            if (!_rewinding) Draw();
-        }
+        // if (Time.time > _nextUpdate)
+        // {
+        // _nextUpdate += _period;
+        if (!_rewinding) Draw();
+        // }
         if (_rewinding) Rewind();
     }
 

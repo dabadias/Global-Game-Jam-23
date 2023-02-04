@@ -10,6 +10,7 @@ public class Button : MonoBehaviour
     public GameObject[] playersThatCanSee;
     private GameObject playerInteracting;
     private PlayerSwitcher _playerSw;
+    private StarterAssetsInputs _input;
     private MeshRenderer _mesh;
     private bool _inRange;
     private bool _on;
@@ -18,17 +19,13 @@ public class Button : MonoBehaviour
     private void Start()
     {
         _playerSw = GameObject.FindWithTag("PlayerController").GetComponent<PlayerSwitcher>();
+        _input = _playerSw.currentPlayer.GetComponent<StarterAssetsInputs>();
         _mesh = GetComponent<MeshRenderer>();
-    }
-
-    private void Update()
-    {
-        ShowHide();
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (!_on && _playerSw.currentPlayer.GetComponent<StarterAssetsInputs>().interact && other.gameObject == _playerSw.currentPlayer)
+        if (!_on && _input.interact && other.gameObject == _playerSw.currentPlayer)
         {
             StartCoroutine(ActivateCo());
         }
@@ -43,9 +40,13 @@ public class Button : MonoBehaviour
         onTrigger.Invoke();
     }
 
-
-    private void ShowHide()
+    public void OnPlayerSwitch()
     {
-        _mesh.enabled = Array.Exists(playersThatCanSee, e => e == _playerSw.currentPlayer);
+        ShowHide();
+        UpdateInputs();
     }
+
+    private void UpdateInputs() => _input = _playerSw.currentPlayer.GetComponent<StarterAssetsInputs>();
+
+    private void ShowHide() => _mesh.enabled = Array.Exists(playersThatCanSee, e => e == _playerSw.currentPlayer);
 }

@@ -7,6 +7,7 @@ public class PlayerSwitcher : MonoBehaviour
 {
     public GameObject[] players;
     [HideInInspector] public GameObject currentPlayer => players[_currentPlayer];
+    public SignalSender playerSwitchSignal;
 
     private CinemachineVirtualCamera _vcam;
     private List<Transform> _cameraTargets;
@@ -58,6 +59,7 @@ public class PlayerSwitcher : MonoBehaviour
                 _playerInputs[newPlayer].enabled = true;
                 _playerInputs[newPlayer].SwitchCurrentControlScheme("KeyboardMouse", _in); // This shouldn't be needed...
                 _currentPlayer = newPlayer;
+                playerSwitchSignal.Raise();
             }
         }
         catch (System.IndexOutOfRangeException ex)
