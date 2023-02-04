@@ -6,12 +6,13 @@ using UnityEngine.InputSystem;
 public class PlayerSwitcher : MonoBehaviour
 {
     public GameObject[] players;
+    [HideInInspector] public GameObject currentPlayer => players[_currentPlayer];
+    
     private CinemachineVirtualCamera _vcam;
     private List<Transform> _cameraTargets;
     private List<PlayerInput> _playerInputs;
     private InputDevice[] _in;
     private int _currentPlayer;
-
 
     private void Start()
     {
@@ -43,18 +44,18 @@ public class PlayerSwitcher : MonoBehaviour
     {
         try
         {
-            int _newPlayer = -1;
+            int newPlayer = -1;
 
-            if (Input.GetKeyDown(KeyCode.Alpha1)) _newPlayer = 0;
-            else if (Input.GetKeyDown(KeyCode.Alpha2)) _newPlayer = 1;
+            if (Input.GetKeyDown(KeyCode.Alpha1)) newPlayer = 0;
+            else if (Input.GetKeyDown(KeyCode.Alpha2)) newPlayer = 1;
 
-            if (_newPlayer != -1 && _newPlayer != _currentPlayer)
+            if (newPlayer != -1 && newPlayer != _currentPlayer)
             {
-                _vcam.Follow = _cameraTargets[_newPlayer];
+                _vcam.Follow = _cameraTargets[newPlayer];
                 _playerInputs[_currentPlayer].enabled = false;
-                _playerInputs[_newPlayer].enabled = true;
-                _playerInputs[_newPlayer].SwitchCurrentControlScheme("KeyboardMouse", _in); // This shouldn't be needed...
-                _currentPlayer = _newPlayer;
+                _playerInputs[newPlayer].enabled = true;
+                _playerInputs[newPlayer].SwitchCurrentControlScheme("KeyboardMouse", _in); // This shouldn't be needed...
+                _currentPlayer = newPlayer;
             }
         }
         catch (System.IndexOutOfRangeException ex)
