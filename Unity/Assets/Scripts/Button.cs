@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class Button : MonoBehaviour
 {
+    public AudioSource audioSource;
     public GameObject[] playersThatCanSee;
     private GameObject playerInteracting;
     private PlayerSwitcher _playerSw;
@@ -38,6 +39,7 @@ public class Button : MonoBehaviour
         _mesh.material.color = new Color(0f, 255f, 0f);
         _on = true;
         onTrigger.Invoke();
+        audioSource.Play();
     }
 
     private void ShowHide()
