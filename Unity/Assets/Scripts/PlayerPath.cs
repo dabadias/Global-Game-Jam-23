@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class PlayerPath : MonoBehaviour
 {
+    public Transform trail;
     private StarterAssetsInputs _input;
     private List<Vector3> _positions;
     private List<Quaternion> _rotations;
-    private List<LineRenderer> _lines;
+    private List<Transform> _lines;
     // private float _period = 0.033f;
     // private float _nextUpdate = 0.0f;
     private float speed = 10f;
@@ -18,7 +19,7 @@ public class PlayerPath : MonoBehaviour
         _input = GetComponent<StarterAssetsInputs>();
         _positions = new List<Vector3>();
         _rotations = new List<Quaternion>();
-        _lines = new List<LineRenderer>();
+        _lines = new List<Transform>();
 
         _positions.Add(transform.position);
         _rotations.Add(transform.rotation);
@@ -50,10 +51,15 @@ public class PlayerPath : MonoBehaviour
             _positions.Add(transform.position);
             _rotations.Add(transform.rotation);
 
-            var line = new GameObject("Line").AddComponent<LineRenderer>();
-            line.SetPosition(0, lastPosition);
-            line.SetPosition(1, transform.position);
-            _lines.Add(line);
+            var c = Instantiate(trail, lastPosition, Quaternion.identity);
+            c.LookAt(transform.position);
+            _lines.Add(c);
+
+
+            // var line = new GameObject("Line").AddComponent<LineRenderer>();
+            // line.SetPosition(0, lastPosition);
+            // line.SetPosition(1, transform.position);
+            // _lines.Add(line);
         }
     }
 
