@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using StarterAssets;
 using UnityEngine;
 using UnityEngine.Events;
@@ -30,17 +31,19 @@ public class Button : MonoBehaviour
         Debug.Log(_playerSw.currentPlayer.GetComponent<StarterAssetsInputs>().interact);
         if (!_on && _playerSw.currentPlayer.GetComponent<StarterAssetsInputs>().interact && other.gameObject == _playerSw.currentPlayer)
         {
-            Activate();
+            StartCoroutine(ActivateCo());
         }
     }
 
-    private void Activate()
+    private IEnumerator ActivateCo()
     {
+        audioSource.Play();
+        yield return new WaitForSeconds(1f);
         _mesh.material.color = new Color(0f, 255f, 0f);
         _on = true;
         onTrigger.Invoke();
-        audioSource.Play();
     }
+
 
     private void ShowHide()
     {
