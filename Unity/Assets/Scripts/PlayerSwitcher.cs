@@ -13,6 +13,7 @@ public class PlayerSwitcher : MonoBehaviour
     private List<PlayerInput> _playerInputs;
     private InputDevice[] _in;
     private int _currentPlayer;
+    private bool _canSwitch;
 
     private void Start()
     {
@@ -37,10 +38,10 @@ public class PlayerSwitcher : MonoBehaviour
 
     private void Update()
     {
-        ChangeFollow();
+        if (_canSwitch) SwitchPlayer();
     }
 
-    private void ChangeFollow()
+    private void SwitchPlayer()
     {
         try
         {
@@ -64,4 +65,6 @@ public class PlayerSwitcher : MonoBehaviour
             Debug.LogError(ex);
         }
     }
+
+    public void EnableSwitch() => _canSwitch = true;
 }
