@@ -53,7 +53,6 @@ namespace StarterAssets
 
         [Header("Sound")]
         public AudioSource walkingAudioSource;
-        public AudioClip walkingAudioSound;
 
         // cinemachine
         private float _cinemachineTargetPitch;
@@ -166,6 +165,7 @@ namespace StarterAssets
             // if there is no input, set the target speed to 0
             if (_input.move == Vector2.zero) {
                 targetSpeed = 0.0f;
+                if (walkingAudioSource.isPlaying) walkingAudioSource.Stop();
             }
 
             // a reference to the players current horizontal velocity
@@ -201,7 +201,7 @@ namespace StarterAssets
                 inputDirection = (-transform.forward) * _input.move.x + transform.right * _input.move.y;
 
                 // play sound if it wasn't playing
-                // walkingAudioSource.PlayOneShot(walkingAudioSound);
+                if (!walkingAudioSource.isPlaying) walkingAudioSource.Play();
             }
 
             // move the player

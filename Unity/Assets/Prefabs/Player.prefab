@@ -991,9 +991,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: d4a46dfc2be924efc85045364272f320, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.692
+  m_Volume: 0.633
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1166,8 +1166,7 @@ MonoBehaviour:
   CinemachineCameraTarget: {fileID: 3435376064114552070}
   TopClamp: 89
   BottomClamp: -89
-  walkingAudioSource: {fileID: 0}
-  walkingAudioSound: {fileID: 0}
+  walkingAudioSource: {fileID: 6391227458873156686}
 --- !u!114 &6635739311639626824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1202,6 +1201,7 @@ MonoBehaviour:
   jump: 0
   sprint: 0
   interact: 0
+  rewind: 0
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
