@@ -18,7 +18,7 @@ public class Button : MonoBehaviour
     private void Start()
     {
         _playerSw = GameObject.FindWithTag("PlayerController").GetComponent<PlayerSwitcher>();
-        _mesh = gameObject.GetComponent<MeshRenderer>();
+        _mesh = GetComponent<MeshRenderer>();
     }
 
     private void Update()
@@ -28,7 +28,6 @@ public class Button : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log(_playerSw.currentPlayer.GetComponent<StarterAssetsInputs>().interact);
         if (!_on && _playerSw.currentPlayer.GetComponent<StarterAssetsInputs>().interact && other.gameObject == _playerSw.currentPlayer)
         {
             StartCoroutine(ActivateCo());

@@ -32,7 +32,11 @@ namespace StarterAssets
         {
             starterAssetsInputs.InteractInput(virtualInteractState);
         }
-        
+
+        public void VirtualRewindInput(bool virtualRewindState)
+        {
+            starterAssetsInputs.RewindInput(virtualRewindState);
+        }
     }
 
 }
