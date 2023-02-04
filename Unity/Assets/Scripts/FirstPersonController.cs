@@ -144,7 +144,7 @@ namespace StarterAssets
                 _cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
 
                 // Update Cinemachine camera target pitch
-                CinemachineCameraTarget.transform.localRotation = Quaternion.Euler(_cinemachineTargetPitch, 0.0f, 0.0f);
+                CinemachineCameraTarget.transform.localRotation = Quaternion.Euler(_cinemachineTargetPitch, 90.0f, 0.0f);
 
                 // rotate the player left and right
                 transform.Rotate(Vector3.up * _rotationVelocity);
@@ -191,7 +191,8 @@ namespace StarterAssets
             if (_input.move != Vector2.zero)
             {
                 // move
-                inputDirection = transform.right * _input.move.x + transform.forward * _input.move.y;
+                // inputDirection = transform.right * _input.move.x + transform.forward * _input.move.y;
+                inputDirection = (-transform.forward) * _input.move.x + transform.right * _input.move.y;
             }
 
             // move the player
