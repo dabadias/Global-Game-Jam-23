@@ -13,7 +13,6 @@ public class Connector : MonoBehaviour
     private bool _inRange;
     private bool _on;
     public UnityEvent onTrigger;
-    public UnityEvent onTriggerAgain;
 
     private void Start()
     {
@@ -23,17 +22,16 @@ public class Connector : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (_input.interact && other.gameObject == _playerSw.currentPlayer)
+        if (!_on && _input.interact && other.gameObject == _playerSw.currentPlayer)
         {
-            if (_on) StartCoroutine(ActivateCo(onTriggerAgain));
-            else StartCoroutine(ActivateCo(onTrigger));
+            StartCoroutine(ActivateCo());
         }
     }
 
-    private IEnumerator ActivateCo(UnityEvent trigger)
+    private IEnumerator ActivateCo()
     {
-        _on = !_on;
-        trigger.Invoke();
+        _on = true;
+        onTrigger.Invoke();
         yield return 0;
     }
 
