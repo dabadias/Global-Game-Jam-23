@@ -7,14 +7,14 @@ public class PlayerPath : MonoBehaviour
 {
     public Transform trail;
     public TMP_Text capacity;
-    private GameObject endSocket;
+    private Circuit circuit;
     private StarterAssetsInputs _input;
     private List<Vector3> _positions;
     private List<Quaternion> _rotations;
     private List<Transform> _lines;
     private float speed = 10f;
     private bool _rewinding;
-    private bool _canDraw;
+    private bool _drawing;
     private int size;
 
     private void Start()
@@ -36,8 +36,25 @@ public class PlayerPath : MonoBehaviour
     private void FixedUpdate()
     {
         if (_rewinding || _positions.Count == size) Rewind();
-        else if (_canDraw) Draw();
+        else if (_drawing) Draw();
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (_input.interact)
+        {
+            if (other.CompareTag("CircuitFrom") && !_drawing)
+            {
+                circuit = other.gameObject.GetComponentInParent<Circuit>();
+                StartDrawing(circuit.size);
+            }
+            else if (other.CompareTag("CircuitTo") && _drawing && other.gameObject == circuit.to)
+            {
+                StopDrawing();
+            }
+        }
+    }
+
 
     private void Draw()
     {
@@ -85,17 +102,14 @@ public class PlayerPath : MonoBehaviour
         _positions.Add(transform.position);
         _rotations.Add(transform.rotation);
 
-        _canDraw = true;
+        _drawing = true;
     }
 
-    public void StopDrawing(GameObject socketThatCalled)
+    public void StopDrawing()
     {
-        if (socketThatCalled == endSocket)
-        {
-            _canDraw = false;
-            capacity.text = "";
-        }
-    }
+        _drawing = false;
+        capacity.text = "";
 
-    public void SetSocket(GameObject socket) => endSocket = socket;
+        StartCoroutine(circuit.ActivateCo());
+    }
 }

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - CinemachineTarget
   - PlayerController
+  - CircuitFrom
+  - CircuitTo
   layers:
   - Default
   - TransparentFX
