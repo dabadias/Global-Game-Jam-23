@@ -16,6 +16,7 @@ public class NarratorEnd : MonoBehaviour
     {
         t = gameObject.GetComponent<TMP_Text>();
         StartCoroutine(Co());
+        Application.Quit();
     }
 
     IEnumerator display(string str)
