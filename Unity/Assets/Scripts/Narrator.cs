@@ -16,11 +16,8 @@ public class Narrator : MonoBehaviour
     }
 
     IEnumerator display(string str) {
-
         t.text = "";
-
         foreach (char c in str) {
-
             t.text += c.ToString();
             yield return new WaitForSeconds(textAnimSpeed);
         }
@@ -56,25 +53,31 @@ public class Narrator : MonoBehaviour
         yield return display("POWERING UP...");
         yield return new WaitForSeconds(wait);
 
-        t.color = new Color(15, 98, 230, 255);
+        t.color = new Color(255,0,0, 255);
         yield return display("COMS: OFFLINE");
         yield return new WaitForSeconds(wait);
 
+        t.color = new Color(255,0,0, 255);
         yield return display("SENSORS: HEAVY DAMAGE");
         yield return new WaitForSeconds(wait);
 
+        t.color = new Color(255,0,0, 255);
         yield return display("UPPER LIMBS: HEAVY DAMAGE");
         yield return new WaitForSeconds(wait);
 
+        t.color = new Color(0,255,0, 255);
         yield return display("LOWER LIMBS: ONLINE");
         yield return new WaitForSeconds(wait);
 
+        t.color = new Color(255,255,255, 255);
         yield return display("CONNECTION TO GRID LOST");
         yield return new WaitForSeconds(wait);
 
+        t.color = new Color(170,50,50,255);
         yield return display("WE HAVE LOST OUR ROOTS");
         yield return new WaitForSeconds(wait);
 
+        t.color = new Color(255,255,255,255);
         yield return display("YOU MUST...");
         yield return new WaitForSeconds(wait);
     }
