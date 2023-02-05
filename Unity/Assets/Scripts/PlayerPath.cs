@@ -20,9 +20,7 @@ public class PlayerPath : MonoBehaviour
     private void Start()
     {
         _input = GetComponent<StarterAssetsInputs>();
-        _positions = new List<Vector3>();
-        _rotations = new List<Quaternion>();
-        _lines = new List<Transform>();
+        ResetCircuits();
     }
 
     private void Update()
@@ -55,6 +53,13 @@ public class PlayerPath : MonoBehaviour
         }
     }
 
+
+    private void ResetCircuits()
+    {
+        _positions = new List<Vector3>();
+        _rotations = new List<Quaternion>();
+        _lines = new List<Transform>();
+    }
 
     private void Draw()
     {
@@ -110,6 +115,7 @@ public class PlayerPath : MonoBehaviour
         _drawing = false;
         capacity.text = "";
 
+        ResetCircuits();
         StartCoroutine(circuit.ActivateCo());
     }
 }

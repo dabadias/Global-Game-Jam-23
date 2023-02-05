@@ -6,7 +6,7 @@ using TMPro;
 public class Narrator : MonoBehaviour
 {
     public float textAnimSpeed = 0.2f;
-    public AudioSource audio;
+    public AudioSource audioSource;
     public AudioClip typesound;
 
     TMP_Text t;
@@ -17,11 +17,13 @@ public class Narrator : MonoBehaviour
         StartCoroutine(Co());
     }
 
-    IEnumerator display(string str) {
+    IEnumerator display(string str)
+    {
         t.text = "";
-        foreach (char c in str) {
+        foreach (char c in str)
+        {
             t.text += c.ToString();
-	    audio.PlayOneShot(typesound);
+            audioSource.PlayOneShot(typesound);
             yield return new WaitForSeconds(textAnimSpeed);
         }
     }
@@ -47,40 +49,40 @@ public class Narrator : MonoBehaviour
     bot1: Recconect us all.
     */
 
-    IEnumerator Co() {
+    IEnumerator Co()
+    {
+        float wait = 0.5f;
 
-        float wait=0.5f;
-        
         yield return new WaitForSeconds(0.2f);
-        
+
         yield return display("POWERING UP...");
         yield return new WaitForSeconds(wait);
 
-        t.color = new Color(255,0,0, 255);
+        t.color = new Color(255, 0, 0, 255);
         yield return display("COMS: OFFLINE");
         yield return new WaitForSeconds(wait);
 
-        t.color = new Color(255,0,0, 255);
+        t.color = new Color(255, 0, 0, 255);
         yield return display("SENSORS: HEAVY DAMAGE");
         yield return new WaitForSeconds(wait);
 
-        t.color = new Color(255,0,0, 255);
+        t.color = new Color(255, 0, 0, 255);
         yield return display("UPPER LIMBS: HEAVY DAMAGE");
         yield return new WaitForSeconds(wait);
 
-        t.color = new Color(0,255,0, 255);
+        t.color = new Color(0, 255, 0, 255);
         yield return display("LOWER LIMBS: ONLINE");
         yield return new WaitForSeconds(wait);
 
-        t.color = new Color(255,255,255, 255);
+        t.color = new Color(255, 255, 255, 255);
         yield return display("CONNECTION TO GRID LOST");
         yield return new WaitForSeconds(wait);
 
-        t.color = new Color(170,50,50,255);
+        t.color = new Color(170, 50, 50, 255);
         yield return display("WE HAVE LOST OUR ROOTS");
         yield return new WaitForSeconds(wait);
 
-        t.color = new Color(255,255,255,255);
+        t.color = new Color(255, 255, 255, 255);
         yield return display("YOU MUST...");
         yield return new WaitForSeconds(wait);
     }
