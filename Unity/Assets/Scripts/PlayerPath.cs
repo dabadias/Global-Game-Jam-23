@@ -1,18 +1,20 @@
 using System.Collections.Generic;
 using StarterAssets;
+using TMPro;
 using UnityEngine;
 
 public class PlayerPath : MonoBehaviour
 {
     public Transform trail;
+    public TMP_Text capacity;
     private StarterAssetsInputs _input;
     private List<Vector3> _positions;
     private List<Quaternion> _rotations;
     private List<Transform> _lines;
-    // private float _period = 0.033f;
-    // private float _nextUpdate = 0.0f;
     private float speed = 10f;
     private bool _rewinding;
+    private bool _canDraw;
+    private int size;
 
     private void Start()
     {
@@ -20,9 +22,6 @@ public class PlayerPath : MonoBehaviour
         _positions = new List<Vector3>();
         _rotations = new List<Quaternion>();
         _lines = new List<Transform>();
-
-        _positions.Add(transform.position);
-        _rotations.Add(transform.rotation);
     }
 
     private void Update()
@@ -35,12 +34,8 @@ public class PlayerPath : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // if (Time.time > _nextUpdate)
-        // {
-        // _nextUpdate += _period;
-        if (!_rewinding) Draw();
-        // }
-        if (_rewinding) Rewind();
+        if (_rewinding || _positions.Count == size) Rewind();
+        else if (_canDraw) Draw();
     }
 
     private void Draw()
@@ -54,17 +49,13 @@ public class PlayerPath : MonoBehaviour
             var c = Instantiate(trail, lastPosition, Quaternion.identity);
             c.LookAt(transform.position);
             _lines.Add(c);
-
-
-            // var line = new GameObject("Line").AddComponent<LineRenderer>();
-            // line.SetPosition(0, lastPosition);
-            // line.SetPosition(1, transform.position);
-            // _lines.Add(line);
+            capacity.text = $"{size - _positions.Count}/{size}";
         }
     }
 
     private void Rewind()
     {
+        _rewinding = true;
         if (_positions.Count > 1)
         {
             transform.position = Vector3.MoveTowards(transform.position, _positions[_positions.Count - 1], speed * Time.deltaTime);
@@ -83,5 +74,22 @@ public class PlayerPath : MonoBehaviour
         {
             _rewinding = false;
         }
+    }
+
+    public void StartDrawing(int size)
+    {
+        this.size = size;
+        capacity.text = $"{size - _positions.Count}/{size}";
+        
+        _positions.Add(transform.position);
+        _rotations.Add(transform.rotation);
+
+        _canDraw = true;
+    }
+
+    public void StopDrawing()
+    {
+        _canDraw = false;
+        capacity.text = "";
     }
 }
