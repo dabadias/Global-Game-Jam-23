@@ -34,7 +34,7 @@ public class Circuit : MonoBehaviour
         {
             Debug.Log(true);
             _lampFrom.material.color = new Color(255f, 255f, 255f);
-            _accentFrom.material.color = new Color(255f, 255f, 255f);
+            _accentFrom.material.color = new Color(0f, 0f, 0f);
             _lampTo.material.color = new Color(255f, 255f, 255f);
             _accentTo.material.color = new Color(255f, 255f, 255f);
         }
