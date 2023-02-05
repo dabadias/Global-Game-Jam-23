@@ -32,7 +32,6 @@ public class Circuit : MonoBehaviour
     {
         if (_playerSw.currentPlayer == blind)
         {
-            Debug.Log(true);
             _lampFrom.material.color = new Color(255f, 255f, 255f);
             _accentFrom.material.color = new Color(0f, 0f, 0f);
             _lampTo.material.color = new Color(255f, 255f, 255f);

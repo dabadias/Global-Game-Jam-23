@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WinCondition : MonoBehaviour
 {
@@ -10,8 +11,7 @@ public class WinCondition : MonoBehaviour
         _treeConnectionsCurrent++;
         if (_treeConnectionsCurrent == treeConnections)
         {
-            // TODO: win
-            Debug.Log("COMPLETE");
+            SceneManager.LoadScene("End");
         }
     }
 }
