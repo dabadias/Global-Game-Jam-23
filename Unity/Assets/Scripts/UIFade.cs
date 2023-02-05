@@ -53,10 +53,12 @@ public class UIFade : MonoBehaviour
             element.color = new Color(color.r, color.g, color.b, a);
             yield return null;
         }
+        element.gameObject.SetActive(false);
     }
 
     private IEnumerator FadeIn()
     {
+        element.gameObject.SetActive(true);
         for (float a = 0; a <= fadeTime; a += Time.deltaTime)
         {
             element.color = new Color(color.r, color.g, color.b, a);
