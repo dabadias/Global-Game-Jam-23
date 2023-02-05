@@ -15,6 +15,7 @@ public class Narrator : MonoBehaviour
     void Start()
     {
         t = gameObject.GetComponent<TMP_Text>();
+        Cursor.lockState = CursorLockMode.Locked;
         StartCoroutine(Co());
     }
 

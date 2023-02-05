@@ -34,15 +34,11 @@ public class Circuit : MonoBehaviour
         {
             _lampFrom.material.color = new Color(255f, 255f, 255f);
             _accentFrom.material.color = new Color(0f, 0f, 0f);
-            _lampTo.material.color = new Color(255f, 255f, 255f);
-            _accentTo.material.color = new Color(255f, 255f, 255f);
         }
         else
         {
             _lampFrom.material.color = _lampColor;
             _accentFrom.material.color = _accentColor;
-            _lampTo.material.color = _lampColor;
-            _accentTo.material.color = _accentColor;
         }
     }
 }
