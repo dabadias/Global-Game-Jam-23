@@ -16,7 +16,6 @@ public class NarratorEnd : MonoBehaviour
     {
         t = gameObject.GetComponent<TMP_Text>();
         StartCoroutine(Co());
-        Application.Quit();
     }
 
     IEnumerator display(string str)
@@ -64,6 +63,8 @@ Art/Modeling: AntÃ³nio Canteiro
         yield return display("THANK YOU FOR PLAYING");
         yield return new WaitForSeconds(wait);
         yield return new WaitForSeconds(wait);
+
+        Application.Quit();
     }
 
 }

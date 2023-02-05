@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Cinemachine;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,6 +9,7 @@ public class PlayerSwitcher : MonoBehaviour
     public GameObject[] players;
     [HideInInspector] public GameObject currentPlayer => players[_currentPlayer];
     public SignalSender playerSwitchSignal;
+    public TMP_Text playerIdentifier;
 
     private CinemachineVirtualCamera _vcam;
     private List<Transform> _cameraTargets;
@@ -60,6 +62,7 @@ public class PlayerSwitcher : MonoBehaviour
                 _playerInputs[newPlayer].SwitchCurrentControlScheme("KeyboardMouse", _in); // This shouldn't be needed...
                 _currentPlayer = newPlayer;
                 playerSwitchSignal.Raise();
+                playerIdentifier.text = "Robot No. 00000" + newPlayer;
             }
         }
         catch (System.IndexOutOfRangeException ex)
