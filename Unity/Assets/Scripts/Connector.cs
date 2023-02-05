@@ -6,11 +6,8 @@ using UnityEngine.Events;
 
 public class Connector : MonoBehaviour
 {
-    public GameObject[] playersThatCanSee;
-    private GameObject playerInteracting;
     private PlayerSwitcher _playerSw;
     private StarterAssetsInputs _input;
-    private bool _inRange;
     private bool _on;
     public UnityEvent onTrigger;
 
@@ -34,11 +31,4 @@ public class Connector : MonoBehaviour
         onTrigger.Invoke();
         yield return 0;
     }
-
-    public void OnPlayerSwitch()
-    {
-        UpdateInputs();
-    }
-
-    private void UpdateInputs() => _input = _playerSw.currentPlayer.GetComponent<StarterAssetsInputs>();
 }

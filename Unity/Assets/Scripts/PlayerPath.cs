@@ -7,6 +7,7 @@ public class PlayerPath : MonoBehaviour
 {
     public Transform trail;
     public TMP_Text capacity;
+    private GameObject endSocket;
     private StarterAssetsInputs _input;
     private List<Vector3> _positions;
     private List<Quaternion> _rotations;
@@ -80,16 +81,21 @@ public class PlayerPath : MonoBehaviour
     {
         this.size = size;
         capacity.text = $"{size - _positions.Count}/{size}";
-        
+
         _positions.Add(transform.position);
         _rotations.Add(transform.rotation);
 
         _canDraw = true;
     }
 
-    public void StopDrawing()
+    public void StopDrawing(GameObject socketThatCalled)
     {
-        _canDraw = false;
-        capacity.text = "";
+        if (socketThatCalled == endSocket)
+        {
+            _canDraw = false;
+            capacity.text = "";
+        }
     }
+
+    public void SetSocket(GameObject socket) => endSocket = socket;
 }
