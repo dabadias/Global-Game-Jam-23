@@ -588,7 +588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textAnimSpeed: 0.1
-  audio: {fileID: 741722668}
+  audioSource: {fileID: 741722668}
   typesound: {fileID: 8300000, guid: 0a71263d17cba46a6ac6359ec1edf0ad, type: 3}
 --- !u!95 &771383412
 Animator:

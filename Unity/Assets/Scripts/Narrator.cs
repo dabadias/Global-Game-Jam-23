@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Narrator : MonoBehaviour
 {
@@ -85,6 +86,8 @@ public class Narrator : MonoBehaviour
         t.color = new Color(255, 255, 255, 255);
         yield return display("YOU MUST...");
         yield return new WaitForSeconds(wait);
+
+        SceneManager.LoadScene("Level");
     }
 
 }
