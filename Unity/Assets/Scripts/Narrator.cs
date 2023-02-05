@@ -6,6 +6,8 @@ using TMPro;
 public class Narrator : MonoBehaviour
 {
     public float textAnimSpeed = 0.2f;
+    public AudioSource audio;
+    public AudioClip typesound;
 
     TMP_Text t;
     // Start is called before the first frame update
@@ -19,6 +21,7 @@ public class Narrator : MonoBehaviour
         t.text = "";
         foreach (char c in str) {
             t.text += c.ToString();
+	    audio.PlayOneShot(typesound);
             yield return new WaitForSeconds(textAnimSpeed);
         }
     }
